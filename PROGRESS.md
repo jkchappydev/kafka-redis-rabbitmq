@@ -14,7 +14,7 @@
 - 프로젝트 지침 및 문서 정리: `AGENTS.md`, `CLAUDE.md`, 한국어 `README.md`
 - GitHub 원격 저장소 연결 및 최초 푸시
   - 원격: https://github.com/jkchappydev/kafka-redis-rabbitmq
-  - `master`를 기본(메인) 브랜치로 사용
+  - `main`을 기본 브랜치로 사용
 
 ## 다음 진행 예정
 
