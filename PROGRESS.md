@@ -11,6 +11,7 @@
   - 고정 버전: Spring Boot 4.1.1, Gradle Wrapper 9.7.1
   - `/api/health` 최소 API와 HTTP 통합 테스트 작성
 - 명령 래퍼(`scripts/`, `Makefile`) 제거 — npm·gradlew·docker compose를 직접 실행하는 방식으로 전환
+- 실행/종료 명령만 추린 `COMMANDS.md` 작성 (인프라 전체·개별, 프런트엔드, 백엔드)
 - 프로젝트 지침 및 문서 정리: `AGENTS.md`, `CLAUDE.md`, 한국어 `README.md`
 - Kafka / Redis / RabbitMQ 로컬 컨테이너 구성 (`docker-compose.yaml`)
   - 고정 버전: Kafka 4.3.1(KRaft 단일 노드), Redis 8.2.9(LTS 라인), RabbitMQ 4.2.9-management(LTS 시리즈)

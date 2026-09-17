@@ -100,6 +100,7 @@ HTTP 수준 검증이며 브라우저 DOM 테스트는 아닙니다. 첫 설치�
 - `backend/`: Spring Web MVC, Validation, Actuator, health DTO 및 HTTP 통합 테스트
 - `docker-compose.yaml`: Kafka·Redis·RabbitMQ 로컬 컨테이너 구성
 - `.env.example`: 인프라 버전·포트·인증 정보 덮어쓰기 예시
+- `COMMANDS.md`: 자주 쓰는 명령어 한 줄 요약 모음
 - `AGENTS.md`, `CLAUDE.md`: 두 에이전트가 공유하는 프로젝트 지침
 
 비즈니스 기능 추가 시 Controller → Service → Repository로 나누고 DTO를 사용합니다. 현재 health API에는 비즈니스 로직과 DB가 없어 불필요한 계층을 추가하지 않았습니다.
