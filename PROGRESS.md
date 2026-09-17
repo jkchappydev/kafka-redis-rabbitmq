@@ -10,17 +10,24 @@
 - Spring Boot + Java 21 + Gradle Kotlin DSL 백엔드 초기 구성 (`backend/`)
   - 고정 버전: Spring Boot 4.1.1, Gradle Wrapper 9.7.1
   - `/api/health` 최소 API와 HTTP 통합 테스트 작성
-- 공통 명령 체계 구성: `make doctor / setup / dev / verify / smoke` (`scripts/harness.py`)
+- 명령 래퍼(`scripts/`, `Makefile`) 제거 — npm·gradlew·docker compose를 직접 실행하는 방식으로 전환
 - 프로젝트 지침 및 문서 정리: `AGENTS.md`, `CLAUDE.md`, 한국어 `README.md`
+- Kafka / Redis / RabbitMQ 로컬 컨테이너 구성 (`docker-compose.yaml`)
+  - 고정 버전: Kafka 4.3.1(KRaft 단일 노드), Redis 8.2.9(LTS 라인), RabbitMQ 4.2.9-management(LTS 시리즈)
+  - `docker compose up -d --wait` / `down` / `down -v`로 제어
+  - 호스트·컨테이너 리스너 분리, 이름 있는 볼륨으로 데이터 유지, 포트·버전·비밀번호는 `.env`로 덮어쓰기
 - GitHub 원격 저장소 연결 및 최초 푸시
   - 원격: https://github.com/jkchappydev/kafka-redis-rabbitmq
   - `main`을 기본 브랜치로 사용
 
 ## 다음 진행 예정
 
-- Kafka / Redis / RabbitMQ 연동 설계
-  - 저장소 이름에 포함되어 있으나 아직 요구사항이 확정되지 않아 구성하지 않은 상태
-  - 실제 사용 시나리오(메시지 흐름, 캐시 대상)를 정한 뒤 의존성을 추가한다
+- Kafka / Redis / RabbitMQ 백엔드 연동
+  - 브로커 컨테이너는 준비됐고 Spring Boot 쪽 의존성·설정은 아직 없는 상태
+  - 실제 사용 시나리오(메시지 흐름, 캐시 대상)를 정한 뒤 `spring-kafka`, `spring-data-redis`, `spring-boot-starter-amqp`를 추가한다
+  - 백엔드를 호스트에서 실행하므로 접속 주소는 `localhost:9092 / 6379 / 5672` 기준
+- RabbitMQ 버전 정책 재검토
+  - 4.2는 LTS 시리즈지만 커뮤니티 지원이 2026-07-31에 종료됐다. LTS 요건을 우선해 4.2로 두었고, 커뮤니티 지원이 필요하면 `.env`에서 4.3으로 올린다
 - 비즈니스 기능 추가 시 Controller → Service → Repository 계층과 DTO 도입
   - 현재 health API는 비즈니스 로직과 DB가 없어 불필요한 계층을 만들지 않았다
-- CI 구성 검토 (`.github/workflows/`가 비어 있음) — `make verify` 기준의 워크플로 작성
+- CI 구성 검토 (`.github/workflows/`가 비어 있음) — README의 검증 명령을 그대로 옮긴 워크플로 작성
